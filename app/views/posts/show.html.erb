@@ -2,10 +2,10 @@
   <div class="card-body">
     <p id="notice"><%= notice %></p>
 
-    <h1 class="text-center"><%= @post.title %></h1>
+    <h1 class="text-center"><%= ProfFilter.runCheck(@post.title) %></h1>
     <hr >
     <div class="my-4">
-      <%= simple_format(@post.body) %>
+      <%= simple_format(ProfFilter.runCheck(@post.body)) %>
       <%= "Up votes: #{@post.up_votes}" %>
       <%= "Down votes: #{@post.down_votes}" %>
       <%= "Post date: #{@post.send_date}" %>

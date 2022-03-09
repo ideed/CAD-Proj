@@ -7,8 +7,8 @@
 <% @posts.each do |post| %>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
-      <p class="card-text"><%= truncate(post.body, length: 60) %></p>
+      <h5 class="card-title"><%= link_to ProfFilter.runCheck(post.title), post_path(post) %></h5>
+      <p class="card-text"><%= truncate(ProfFilter.runCheck(post.body), length: 60) %></p>
       <p class="card-text"><%= "Up votes: #{post.up_votes}" %></p>
       <p class="card-text"><%= "Down votes: #{post.down_votes}" %></p>
       <p class="card-text"><%= "Post date: #{post.send_date}" %></p>
