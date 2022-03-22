@@ -10,20 +10,11 @@
   </head>
 
   <body>
-  <nav role="navigation">
-    <div class="inner">
-      <a href="#nav" class="nav-collapse" id="nav-collapse">Menu</a>
-      <ul class="nav" id="nav">
-        <li><%= link_to "Home", root_path %></li>
-        <%= render 'devise/menu/registration_items' %>
-        <%= render 'devise/menu/login_items' %>
-      </ul>
-    </div>
-  </nav>
+  <%= render 'devise/menu/header' %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
   <div class="container">
       <%= yield %>
-    </div>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  </div>
   </body>
 </html>
