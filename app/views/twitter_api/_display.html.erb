@@ -1,0 +1,12 @@
+<div class="col-4 overflow-auto" style="height: 650px;">
+  <h1><%= "Department of Education Tweets:" %></h1>
+  <% @tweets.each do |tweet| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-title"><%=tweet.full_text%></p>
+        <p class="card-text"><%= "Number of likes: #{tweet.favorite_count}" %></p>
+        <a href="<%= tweet.url %>" class="card-link">Twitter Link</a>
+      </div>
+    </div>
+  <% end %>
+</div>
