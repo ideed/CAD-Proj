@@ -4,6 +4,12 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     @posts = Post.all
+    if session[:yourPost_ids]
+      @yourPosts = Array.new
+      for postId in session[:yourPost_ids] do
+        @yourPosts.push(Post.find_by(id: postId))
+      end
+    end
   end
 
   # GET /posts/1 or /posts/1.json
@@ -25,6 +31,11 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        if session[:yourPost_ids]
+          session[:yourPost_ids] = session[:yourPost_ids].push(@post.id)
+        else
+          session[:yourPost_ids] = Array.[](@post.id)
+        end
         format.html { redirect_to post_url(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else

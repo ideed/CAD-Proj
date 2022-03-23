@@ -1,8 +1,27 @@
 <div>
-  <h1>Posts</h1>
   <% if user_signed_in? %>
+    <h1>Your posts:</h1>
     <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+    <% if @yourPosts %>
+      <% @yourPosts.each do |yourPost| %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to ProfFilter.runCheck(yourPost.title), post_path(yourPost) %></h5>
+            <p class="card-text"><%= truncate(ProfFilter.runCheck(yourPost.body), length: 60) %></p>
+            <p class="card-text"><%= "Up votes: #{yourPost.up_votes}" %></p>
+            <p class="card-text"><%= "Down votes: #{yourPost.down_votes}" %></p>
+            <p class="card-text"><%= "Post date: #{yourPost.send_date}" %></p>
+            <% if user_signed_in? %>
+              <%= link_to 'Edit', edit_post_path(yourPost), class: 'card-link' %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <h5> You have no posts! </h5>
+    <% end %>
   <% end %>
+  <h1>Posts</h1>
   <hr>
   <% @posts.each do |post| %>
     <div class="card">
@@ -12,9 +31,6 @@
           <p class="card-text"><%= "Up votes: #{post.up_votes}" %></p>
           <p class="card-text"><%= "Down votes: #{post.down_votes}" %></p>
           <p class="card-text"><%= "Post date: #{post.send_date}" %></p>
-        <% if user_signed_in? %>
-          <%= link_to 'Edit', edit_post_path(post), class: 'card-link' %>
-        <% end %>
       </div>
     </div>
 <% end %>
