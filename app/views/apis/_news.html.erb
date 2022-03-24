@@ -1,0 +1,13 @@
+<div class="col-4 overflow-auto" style="height: 650px;margin-right: 10px;margin-left: -10px;">
+  <h1><%= "Irish News:" %></h1>
+  <% @irishNewsArticles.each do |article| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-title" style="font-weight: bold;font-size: 130%;"><%=article["title"]%></p>
+        <p class="card-text" style="font-size: 70%;"><%="Source: #{ article["source"]["name"]}"%></p>
+        <p class="card-text"><%=article["description"] %></p>
+        <a href="<%= article["url"] %>" class="card-link">Article Link</a>
+      </div>
+    </div>
+  <% end %>
+</div>

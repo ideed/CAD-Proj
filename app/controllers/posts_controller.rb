@@ -3,20 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @consumer_key = "62ipBXBp2j46sfc7o24ObDRhR"
-    @consumer_secret = "XBfih8LSbV4HZmNfhQArIc2lLnGj298YHADfClnA7YRveOiJn1"
-    @access_token = "2279402058-MjlA8FMoAOtjdFUAnleb0tjM4IoyUCGgFclGeLI"
-    @access_secret = "1BJ06K2Kd6Yicw0MyPX1YkD50BSZsWEjKb1jgc8gsJu8Y"
-
-    client = Twitter::REST::Client.new do |config|
-      config.consumer_key        = @consumer_key
-      config.consumer_secret     = @consumer_secret
-      config.access_token        = @access_token
-      config.access_token_secret = @access_secret
-    end
-
-    @tweets = client.user_timeline('Education_Ire', count: 6)
-
+    @tweets = getTwitterAPI
     @posts = Post.all
     if session[:yourPost_ids]
       @yourPosts = Array.new
@@ -28,6 +15,19 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    irish_news = IrishNewsAPI.new
+    index = 0
+    articles = Array.new
+    irish_news.posts.each do |post|
+      if index == 2
+         post[1].each do |article|
+           articles.push(article)
+         end
+      else
+        index += 1
+      end
+    end
+    @irishNewsArticles = articles
   end
 
   # GET /posts/new
@@ -79,6 +79,31 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def getTwitterAPI
+    @consumer_key = "62ipBXBp2j46sfc7o24ObDRhR"
+    @consumer_secret = "XBfih8LSbV4HZmNfhQArIc2lLnGj298YHADfClnA7YRveOiJn1"
+    @access_token = "2279402058-MjlA8FMoAOtjdFUAnleb0tjM4IoyUCGgFclGeLI"
+    @access_secret = "1BJ06K2Kd6Yicw0MyPX1YkD50BSZsWEjKb1jgc8gsJu8Y"
+
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key        = @consumer_key
+      config.consumer_secret     = @consumer_secret
+      config.access_token        = @access_token
+      config.access_token_secret = @access_secret
+    end
+
+    client.user_timeline('Education_Ire', count: 6)
+  end
+
+  class IrishNewsAPI
+    include HTTParty
+    base_uri "newsapi.org/"
+
+    def posts
+      self.class.get('/v2/top-headlines?apiKey=8346750eaa5c4a1393c80988f56a7521&country=ie')
     end
   end
 

@@ -1,29 +1,32 @@
-<div class="card my-5">
-  <div class="card-body">
-    <p id="notice"><%= notice %></p>
-
-    <h1 class="text-center"><%= ProfFilter.runCheck(@post.title) %></h1>
-    <hr >
-    <div class="my-4">
-      <%= simple_format(ProfFilter.runCheck(@post.body)) %>
-      <%= "Up votes: #{@post.up_votes}" %>
-      <%= "Down votes: #{@post.down_votes}" %>
-      <%= "Post date: #{@post.send_date}" %>
-    </div>
-
-    <%= link_to 'Back', posts_path, class: 'btn btn-light' %>
-  </div>
-  <div class="card my-1">
+<div class="row">
+  <%= render "apis/news" %>
+  <div class="card my-5 col-8 ">
     <div class="card-body">
-      <p class="font-weight-bold">Comments</p>
-      <%= form_with(model: [@post, @post.comments.build]) do |f| %>
-        <div class="form-group">
-          <%= f.label 'New comment' %>
-          <%= f.text_area :body, class: 'form-control' %>
-        </div>
-        <%= f.submit 'Submit', class: 'btn btn-primary' %>
-      <% end %>
+      <p id="notice"><%= notice %></p>
+
+      <h1 class="text-center"><%= ProfFilter.runCheck(@post.title) %></h1>
+      <hr >
+      <div class="my-4">
+        <%= simple_format(ProfFilter.runCheck(@post.body)) %>
+        <%= "Up votes: #{@post.up_votes}" %>
+        <%= "Down votes: #{@post.down_votes}" %>
+        <%= "Post date: #{@post.send_date}" %>
+      </div>
+
+      <%= link_to 'Back', posts_path, class: 'btn btn-light' %>
     </div>
+    <div class="card my-1">
+      <div class="card-body">
+        <p class="font-weight-bold">Comments</p>
+        <%= form_with(model: [@post, @post.comments.build]) do |f| %>
+          <div class="form-group">
+            <%= f.label 'New comment' %>
+            <%= f.text_area :body, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+    <%= render @post.comments %>
   </div>
-  <%= render @post.comments %>
 </div>
