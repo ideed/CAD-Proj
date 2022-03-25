@@ -1,26 +1,21 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  # GET /comments or /comments.json
   def index
     @comments = Comment.all
   end
 
-  # GET /comments/1 or /comments/1.json
   def show
   end
 
-  # GET /comments/new
   def new
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(parent_id: params[:parent_id])
   end
 
-  # GET /comments/1/edit
   def edit
   end
 
-  # POST /comments or /comments.json
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
@@ -36,7 +31,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /comments/1 or /comments/1.json
   def update
     respond_to do |format|
       if @comment.update(comment_params)
@@ -49,7 +43,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  # DELETE /comments/1 or /comments/1.json
   def destroy
     @comment.destroy
 
@@ -60,12 +53,10 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def comment_params
       params.require(:comment).permit(:post_id, :parent_id, :body, :up_votes, :down_votes, :send_date)
     end
