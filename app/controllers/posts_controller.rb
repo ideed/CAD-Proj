@@ -29,7 +29,10 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    time = Time.new
+    values = time.to_a
+    sendDate = "#{Time.utc(*values)}"
+    @post = Post.new(up_votes: 0, down_votes: 0, send_date:sendDate)
   end
 
   def edit
