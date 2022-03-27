@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update destroy upvote downvote]
 
   def index
     api = GetTwitterAPI.new(Apis.new("twitter.com"))
@@ -77,6 +77,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def upvote
+    @post.upvote_from current_user
+    redirect_to posts_path
+  end
+
+  def downvote
+    @post.downvote_from current_user
+    redirect_to posts_path
+  end
   # Design Pattern Implementations
   class LocalTime
     include Singleton
