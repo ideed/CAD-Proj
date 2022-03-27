@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 
   def new
     local_time = LocalTime.instance
-    @post = Post.new(up_votes: 0, down_votes: 0, send_date:local_time.calculateTime)
+    @post = Post.new(poster: current_user.email,up_votes: 0, down_votes: 0, send_date:local_time.calculateTime)
   end
 
   def edit
@@ -156,6 +156,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :body, :up_votes, :down_votes, :send_date)
+      params.require(:post).permit(:title, :poster, :body, :up_votes, :down_votes, :send_date)
     end
 end

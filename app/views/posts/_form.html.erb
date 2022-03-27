@@ -24,6 +24,6 @@
   <%= form.hidden_field :up_votes, value: @post.up_votes %>
   <%= form.hidden_field :down_votes, value: @post.down_votes %>
   <%= form.hidden_field :send_date, value: @post.send_date %>
-
+  <%= form.hidden_field :poster, value: @post.poster %>
   <%= form.submit "Save Post", class: 'btn btn-primary' %>
 <% end %>

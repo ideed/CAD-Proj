@@ -10,7 +10,8 @@ class CommentsController < ApplicationController
 
   def new
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.new(parent_id: params[:parent_id])
+    local_time = LocalTime.instance
+    @comment = @post.comments.new(parent_id: params[:parent_id], up_votes: 0, down_votes: 0, send_date: local_time.calculateTime, poster: current_user.email)
   end
 
   def edit
@@ -52,12 +53,22 @@ class CommentsController < ApplicationController
     end
   end
 
+  class LocalTime
+    include Singleton
+
+    def calculateTime
+      time = Time.new
+      values = time.to_a
+      @sendDate = "#{Time.utc(*values)}"
+    end
+  end
+
   private
     def set_comment
       @comment = Comment.find(params[:id])
     end
 
     def comment_params
-      params.require(:comment).permit(:post_id, :parent_id, :body, :up_votes, :down_votes, :send_date)
+      params.require(:comment).permit(:post_id, :poster, :parent_id, :body, :up_votes, :down_votes, :send_date)
     end
 end

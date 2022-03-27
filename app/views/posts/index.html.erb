@@ -8,10 +8,11 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><%= link_to ProfFilter.runCheck(yourPost.title), post_path(yourPost) %></h5>
+              <p class="card-text" style="font-weight: bold;"><%= "Poster: You" %></p>
               <p class="card-text"><%= truncate(ProfFilter.runCheck(yourPost.body), length: 60) %></p>
-              <p class="card-text"><%= "Up votes: #{yourPost.get_upvotes.size}" %></p>
-              <p class="card-text"><%= "Down votes: #{yourPost.get_downvotes.size}" %></p>
-              <p class="card-text"><%= "Post date: #{yourPost.send_date}" %></p>
+              <p class="card-text" style="font-size: small;"><%= "Up votes: #{yourPost.get_upvotes.size}" %></p>
+              <p class="card-text" style="font-size: small;"><%= "Down votes: #{yourPost.get_downvotes.size}" %></p>
+              <p class="card-text" style="font-size: small;"><%= "Post date: #{yourPost.send_date}" %></p>
               <% if user_signed_in? %>
                 <%= link_to 'Edit', edit_post_path(yourPost), class: 'card-link' %>
               <% end %>
@@ -28,14 +29,15 @@
       <div class="card">
         <div class="card-body">
             <h5 class="card-title"><%= link_to ProfFilter.runCheck(post.title), post_path(post) %></h5>
+          <p class="card-text" style="font-weight: bold;"><%= "Poster: #{post.poster}" %></p>
             <p class="card-text"><%= truncate(ProfFilter.runCheck(post.body), length: 60) %></p>
-            <p class="card-text"><%= "Up votes: #{post.get_upvotes.size}" %></p>
-            <p class="card-text"><%= "Down votes: #{post.get_downvotes.size}" %></p>
+            <p class="card-text" style="font-size: small;"><%= "Up votes: #{post.get_upvotes.size}" %></p>
+            <p class="card-text" style="font-size: small;"><%= "Down votes: #{post.get_downvotes.size}" %></p>
             <% if user_signed_in? %>
               <%= link_to 'Up Vote Post', like_post_path(post), class: 'btn btn-info mr-2' %>
               <%= link_to 'Down Vote Post', unlike_post_path(post), class: 'btn btn-danger mr-2' %>
             <% end %>
-            <p class="card-text"><%= "Post date: #{post.send_date}" %></p>
+            <p class="card-text" style="font-size: small;"><%= "Post date: #{post.send_date}" %></p>
         </div>
       </div>
   <% end %>

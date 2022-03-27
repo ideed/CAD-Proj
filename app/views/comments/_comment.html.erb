@@ -2,9 +2,6 @@
   <div class="card">
     <div class="card-body">
       <%= ProfFilter.runCheck(comment.body) %>
-      <%= " Up votes: #{comment.up_votes}" %>
-      <%= " Down votes: #{comment.down_votes}" %>
-      <%= " Comment date: #{comment.send_date}" %>
       <%= link_to 'reply', new_post_comment_path(@post, parent_id: comment.id), remote: true, class: 'd-block' %>
     </div>
   </div>

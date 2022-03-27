@@ -2,17 +2,17 @@
   <%= render "apis/news" %>
   <div class="card my-5 col-8 ">
     <div class="card-body">
-      <p id="notice"><%= notice %></p>
-
       <h1 class="text-center"><%= ProfFilter.runCheck(@post.title) %></h1>
       <hr >
-      <div class="my-4">
-        <%= simple_format(ProfFilter.runCheck(@post.body)) %>
-        <%= "Up votes: #{@post.up_votes}" %>
-        <%= "Down votes: #{@post.down_votes}" %>
-        <%= "Post date: #{@post.send_date}" %>
-      </div>
-
+      <p class="card-text" style="font-weight: bold;"><%= "Poster: #{@post.poster}" %></p>
+      <p class="card-text"><%= simple_format(ProfFilter.runCheck(@post.body)) %></p>
+      <p class="card-text" style="font-size: small;"> <%= "Up votes: #{@post.get_upvotes.size}" %></p>
+      <p class="card-text" style="font-size: small;"><%= "Down votes: #{@post.get_downvotes.size}" %></p>
+      <p class="card-text" style="font-size: small;"><%= "Post date: #{@post.send_date}" %></p>
+      <% if user_signed_in? %>
+        <%= link_to 'Up Vote Post', like_post_path(@post), class: 'btn btn-info mr-2' %>
+        <%= link_to 'Down Vote Post', unlike_post_path(@post), class: 'btn btn-danger mr-2' %>
+      <% end %>
       <%= link_to 'Back', posts_path, class: 'btn btn-light' %>
     </div>
     <div class="card my-1">
