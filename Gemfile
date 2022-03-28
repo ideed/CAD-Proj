@@ -19,6 +19,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Devise profile
 gem 'devise'
+# Profanity filter custom GEM made by myself (Emanuel Ivan)
+gem 'prof_filter', '~> 0.0.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -37,8 +39,6 @@ group :development, :test do
 end
 
 group :development do
-  # Profanity filter custom GEM made by myself (Emanuel Ivan)
-  gem 'prof_filter', '~> 0.0.1'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
@@ -47,11 +47,6 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-end
-
-group :production do
-  # Profanity filter custom GEM made by myself (Emanuel Ivan)
-  gem 'prof_filter', '~> 0.0.1'
 end
 
 group :test do
