@@ -20,8 +20,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # Devise profile
 gem 'devise'
-# Profanity filter custom GEM made by myself (Emanuel Ivan)
-gem 'prof_filter', '~> 0.0.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -37,6 +35,11 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+
+group :development, :production do
+  # Profanity filter custom GEM made by myself (Emanuel Ivan)
+  gem 'prof_filter', '~> 0.0.1'
 end
 
 group :development do
