@@ -17,8 +17,6 @@ gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-# Profanity filter custom GEM made by myself (Emanuel Ivan)
-gem 'prof_filter', '~> 0.0.1'
 # Devise profile
 gem 'devise'
 # Use Redis adapter to run Action Cable in production
@@ -39,6 +37,8 @@ group :development, :test do
 end
 
 group :development do
+  # Profanity filter custom GEM made by myself (Emanuel Ivan)
+  gem 'prof_filter', '~> 0.0.1'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
@@ -49,10 +49,16 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  # Profanity filter custom GEM made by myself (Emanuel Ivan)
+  gem 'prof_filter', '~> 0.0.1'
+end
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
