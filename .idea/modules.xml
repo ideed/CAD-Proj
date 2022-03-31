@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../x18313591_Proj_Submission/profFilter/.idea/profFilter.iml" filepath="$PROJECT_DIR$/../x18313591_Proj_Submission/profFilter/.idea/profFilter.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/x18313591_CAD_Proj.iml" filepath="$PROJECT_DIR$/.idea/x18313591_CAD_Proj.iml" />
     </modules>
   </component>
